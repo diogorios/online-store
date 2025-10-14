@@ -1,0 +1,69 @@
+<!-- Pág 417-->
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand text-light" href="/">
+    Loja Virtual
+  </a>
+
+  <button class="navbar-toggler" 
+          type="button" 
+          data-toggle="collapse" 
+          data-target="#navbarSupportedContent">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/admin/main/categoria/">
+          Manutenção de categorias
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/admin/main/produto/">
+          Manutenção de Produtos
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/produtos/">
+          Produtos
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/servicos/">
+          Serviços
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/fale-conosco/">
+          Fale conosco
+        </a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/ajuda/">
+          Ajuda
+        </a>
+      </li>
+
+      <li class="nav-item">
+        {% with quantidade_itens=carrinho|length %}
+          {% if carrinho|length > 0 %}
+            <a class="nav-link text-light" href="{% url 'carrinho:detalhes_carrinho' %}">
+              Seu carrinho de compras: {{ quantidade_itens }} produto{{ quantidade_itens|pluralize }} - R$ {{ carrinho.get_total_geral }}
+            </a>
+          {% else %}
+            <a class="nav-link text-light">
+              Carrinho vazio
+            </a>  
+          {% endif %}
+        {% endwith %}
+      </li>
+
+    </ul>
+  </div>
+</nav>

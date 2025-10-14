@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %}
+    {% if prestador %}
+        {{ prestador.nome }}
+    {% else %}
+        Serviços
+    {% endif %}
+{% endblock %}
+
+{% block conteudo %}
+<div class="container">
+    <div class="row" style="margin-top: 6%">
+        <div class="col-sm-8">
+            <div class="loja-item">
+                <div class="row">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="col-md-6" style="padding-left: 20px">
+                                <h3>{{ servico.nome }}</h3>
+                                <h6>
+                                    <a href="{{ servico.prestador.get_absolute_url }}">
+                                        {{ servico.prestador }}
+                                    </a>
+                                </h6>
+                                <p class="text-muted">R$ {{ servico.valor }}</p>
+
+                                    <form action="{% url 'carrinho:adicionar_servico_ao_carrinho' servico.id %}"
+                                        method="post">
+                                        {{ form_servico_carrinho }}
+                                        {% csrf_token %}
+                                        <input type="submit" value="Adicionar ao carrinho">   
+                                    </form>
+
+                                <p>{{ servico.descricao|safe|linebreaksbr }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
